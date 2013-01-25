@@ -8,15 +8,14 @@ if raspberry_pi?
   # @io = WiringPi::GPIO.new
   # @io.mode(0, OUTPUT)
   # @io.write(0, HIGH)
-end
 
-begin
-  loop do
-    File.open('/tmp/fitbit_leaderboard', 'w') { |f| f.write @client.weekly_leaderboard }
-    sleep 60
+  at_exit do
+    `gpio write 0 1`
+    #@io.write(0, LOW) if @io
   end
-rescue Interrupt => e
-  `gpio write 0 1` if raspberry_pi?
-  #@io.write(0, LOW) if @io
 end
 
+loop do
+  File.open('/tmp/fitbit_leaderboard', 'w') { |f| f.write @client.weekly_leaderboard }
+  sleep 60
+end
