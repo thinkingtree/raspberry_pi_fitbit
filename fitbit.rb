@@ -10,7 +10,7 @@ if raspberry_pi?
   # @io.write(0, HIGH)
 
   at_exit do
-    `gpio write 0 1`
+    `gpio write 0 0`
     #@io.write(0, LOW) if @io
   end
 end
