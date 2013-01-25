@@ -3,9 +3,11 @@
 require "#{File.dirname(__FILE__)}/environment.rb"
 
 if raspberry_pi?
-  @io = WiringPi::GPIO.new
-  @io.mode(0, OUTPUT)
-  @io.write(0, HIGH)
+  `gpio mode 0 out`
+  `gpio write 0 1`
+  # @io = WiringPi::GPIO.new
+  # @io.mode(0, OUTPUT)
+  # @io.write(0, HIGH)
 end
 
 begin
@@ -14,6 +16,7 @@ begin
     sleep 60
   end
 rescue Interrupt => e
-  @io.write(0, LOW) if @io
+  `gpio write 0 1` if raspberry_pi?
+  #@io.write(0, LOW) if @io
 end
 

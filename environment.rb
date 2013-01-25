@@ -5,7 +5,7 @@ def raspberry_pi?
   RUBY_PLATFORM == 'arm-linux-eabihf'
 end
 
-require 'wiringpi' if raspberry_pi?
+# require 'wiringpi' if raspberry_pi?
 
 consumer_key = ENV['FITBIT_CONSUMER_KEY']
 consumer_secret = ENV['FITBIT_CONSUMER_SECRET']
